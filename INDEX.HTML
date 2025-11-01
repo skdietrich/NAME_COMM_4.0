@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NAMECOMM · Psychic Number Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f0f10">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <h1>NAMECOMM</h1>
+    <p class="subtitle">CSPRNG-backed draws with optional human-entropy mixing and audit log.</p>
+  </header>
+
+  <section class="card">
+    <div class="row">
+      <div>
+        <label for="min">Minimum</label>
+        <input id="min" type="number" value="1" step="1" inputmode="numeric">
+      </div>
+      <div>
+        <label for="max">Maximum</label>
+        <input id="max" type="number" value="100" step="1" inputmode="numeric">
+      </div>
+    </div>
+
+    <div class="row mt">
+      <div>
+        <label for="duration">Shuffle duration: <span id="durLabel">7</span>s</label>
+        <input id="duration" type="range" min="5" max="10" step="1" value="7">
+        <div class="hint">Animated shuffle for 5–10 seconds before locking the result.</div>
+      </div>
+      <div>
+        <label>Entropy options</label>
+        <div class="inline">
+          <label class="pill"><input id="mixEntropy" type="checkbox"> mix mouse/keyboard timing</label>
+          <span id="entropyScore" class="pill" title="Estimated added entropy">entropy: 0.00 bits</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage card mt center">
+      <div class="hint">Current draw</div>
+      <div id="display" class="big ticker">—</div>
+      <div class="progress" aria-label="shuffle progress">
+        <div id="bar" class="bar"></div>
+      </div>
+      <div class="inline mt center">
+        <button id="btnDraw">Start Shuffle</button>
+        <button id="btnAbort" class="pill" disabled>Abort</button>
+        <button id="btnCopy" class="pill">Copy result</button>
+      </div>
+      <div id="status" class="hint mt"></div>
+    </div>
+  </section>
+
+  <section class="card mt">
+    <div class="inline space">
+      <strong>Results Log</strong>
+      <div class="inline">
+        <button id="btnExport" class="pill">Export CSV</button>
+        <button id="btnClear" class="pill">Clear</button>
+      </div>
+    </div>
+    <div class="log" role="region" aria-label="results log">
+      <table id="logTable">
+        <thead><tr><th>#</th><th>Result</th><th>Range</th><th>Entropy</th><th>Time (UTC)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="hint">RNG uses rejection sampling on 32-bit CSPRNG to avoid modulo bias.</div>
+  </section>
+
+  <footer class="mt">
+    <span class="muted">Offline-ready PWA. Works on GitHub Pages project subpaths via relative URLs.</span>
+  </footer>
+</main>
+
+<script type="module">
+  import { setupApp } from './app.js';
+  setupApp();
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js', { scope: './' }).catch(()=>{});
+  }
+</script>
+</body>
+</html>

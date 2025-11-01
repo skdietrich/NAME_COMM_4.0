@@ -1,0 +1,38 @@
+:root { --bg:#0f0f10; --surface:#16161a; --ink:#f2f2f5; --muted:#a9a9ad; --acc:#6ee7ff; --warn:#ffb454; --bd:#222; }
+* { box-sizing: border-box }
+html, body { margin:0; height:100% }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  display:flex; min-height:100vh;
+}
+main { width:100%; max-width:960px; margin:auto; padding:24px }
+.top h1 { margin:0 0 6px; letter-spacing:.3px }
+.subtitle { margin:0 0 18px; color: var(--muted) }
+.card { background: var(--surface); border:1px solid var(--bd); border-radius:16px; padding:16px; margin:10px 0 }
+.mt { margin-top:16px }
+.center { text-align:center }
+.space { justify-content:space-between }
+.row { display:grid; grid-template-columns:1fr 1fr; gap:12px }
+@media (max-width:720px){ .row{ grid-template-columns:1fr } }
+label { display:block; font-size:.95rem; color:var(--muted); margin-bottom:6px }
+input[type="number"], input[type="range"] {
+  width:100%; padding:10px 12px; border-radius:10px; border:1px solid #2a2a2f;
+  background:#0f0f13; color:var(--ink);
+}
+button {
+  background: var(--acc); color:#061018; border:0; padding:12px 16px;
+  border-radius:12px; font-weight:700; cursor:pointer
+}
+button:disabled { opacity:.5; cursor:not-allowed }
+.inline { display:flex; gap:12px; align-items:center; flex-wrap:wrap }
+.pill { display:inline-block; padding:6px 12px; border:1px solid #2a2a2f; border-radius:999px; color:var(--muted); background:#0f0f13; font-size:.9rem }
+.big { font-size:56px; font-weight:900; text-align:center; letter-spacing:1px; margin:8px 0; font-variant-numeric: tabular-nums }
+.ticker { min-height:1.2em }
+.progress { height:10px; background:#0a0a0c; border:1px solid #1f1f24; border-radius:999px; overflow:hidden; margin-top:8px }
+.bar { height:100%; width:0%; background: linear-gradient(90deg, var(--acc), #a6ffcb) }
+.hint { color:var(--muted); font-size:.9rem }
+.warn { color: var(--warn) }
+.log { max-height:260px; overflow:auto; font-variant-numeric: tabular-nums; background:#0e0e10; border:1px solid var(--bd); border-radius:12px; padding:12px }
+.log table { width:100%; border-collapse: collapse }
+.log th, .log td { padding:6px 8px; border-bottom:1px solid #1d1d22; text-align:left }
